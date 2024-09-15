@@ -38,19 +38,18 @@ for epoch in range(10000):
     weights_hidden_output += hidden_output.T.dot(d_predicted_output) * learning_rate
     weights_input_hidden += X.T.dot(d_hidden_output) * learning_rate
 
-print("Final predicted output:\n", predicted_output)
+print("Final predicted output from manual neural network:\n", predicted_output)
 
 model = Sequential()
 model.add(Dense(2, input_dim=2, activation='sigmoid'))  
-model.add(Dense(1, activation='sigmoid'))               
+model.add(Dense(1, activation='sigmoid'))  
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 model.fit(X, y, epochs=10000, verbose=0)
 
-loss, accuracy = model.evaluate(X, y)
-print(f"Accuracy: {accuracy * 100:.2f}%")
+loss, accuracy = model.evaluate(X, y, verbose=0)
+print(f"Accuracy from Keras model: {accuracy * 100:.2f}%")
 
 predictions = model.predict(X)
-print("Predictions:\n", predictions)
-
+print("Predictions from Keras model:\n", predictions)
